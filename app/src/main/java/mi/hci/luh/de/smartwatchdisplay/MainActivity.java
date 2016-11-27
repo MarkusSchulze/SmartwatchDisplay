@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity  implements SensorEventListe
         // don't do anything; we don't care
     }
     public void onSensorChanged(SensorEvent event) {
-        cursorView.move(-event.values[0], event.values[1]);
+        float Gx = -event.values[0];
+        float Gy = event.values[1];
+        cursorView.move(Gx, Gy);
         cursorView.invalidate();
     }
 
