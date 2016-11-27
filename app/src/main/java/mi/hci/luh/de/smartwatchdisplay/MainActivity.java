@@ -35,10 +35,30 @@ public class MainActivity extends AppCompatActivity  implements SensorEventListe
         // don't do anything; we don't care
     }
     public void onSensorChanged(SensorEvent event) {
-        float Gx = -event.values[0];
-        float Gy = event.values[1];
+        final float alpha = (float) 0.8;
+
+        // Isolate the force of gravity with the low-pass filter.
+        float[] gravity = new float[3];
+        gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
+        gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
+        gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
+
+        // Remove the gravity contribution with the high-pass filter.
+        float[] linear_acceleration = new float[3];
+        linear_acceleration[0] = event.values[0] - gravity[0];
+        linear_acceleration[1] = event.values[1] - gravity[1];
+        linear_acceleration[2] = event.values[2] - gravity[2];
+
+        //float Gx = -event.values[0];
+        //float Gy = event.values[1];
+
+        float Gx = linear_acceleration[0];
+        float Gy = linear_acceleration[1];
+
         cursorView.move(Gx, Gy);
         cursorView.invalidate();
+
+        //TODO: Calculate Distance and use it for move the Cursor
     }
 
     @Override
