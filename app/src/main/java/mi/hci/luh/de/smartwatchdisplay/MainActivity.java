@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 public class MainActivity extends AppCompatActivity  implements SensorEventListener {
 
     private SensorManager mSensorManager;
-    private BubbleView bubbleView;
+    private CursorView cursorView;
     private LinearLayout layout;
     private Sensor accel;
 
@@ -24,12 +24,9 @@ public class MainActivity extends AppCompatActivity  implements SensorEventListe
 
         // -----------------------------------------------
         // Drawing with Android Motion Sensors
-        // statisch
-
-
         // dynamisch mit accel Sensorvalues
-        bubbleView = new BubbleView(this);
-        setContentView(bubbleView);
+        cursorView = new CursorView(this);
+        setContentView(cursorView);
         accel = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mSensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_NORMAL);
     }
@@ -38,8 +35,8 @@ public class MainActivity extends AppCompatActivity  implements SensorEventListe
         // don't do anything; we don't care
     }
     public void onSensorChanged(SensorEvent event) {
-        bubbleView.move(-event.values[0], event.values[1]);
-        bubbleView.invalidate();
+        cursorView.move(-event.values[0], event.values[1]);
+        cursorView.invalidate();
     }
 
     @Override
@@ -47,8 +44,6 @@ public class MainActivity extends AppCompatActivity  implements SensorEventListe
         // Ideally a game should implement onResume() and onPause()
         // to take appropriate action when the activity looses focus
         super.onResume();
-        //mRenderer.start();
-        //mGLSurfaceView.onResume();
         mSensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_GAME);
     }
 
@@ -57,8 +52,6 @@ public class MainActivity extends AppCompatActivity  implements SensorEventListe
         // Ideally a game should implement onResume() and onPause()
         // to take appropriate action when the activity looses focus
         super.onPause();
-        //mRenderer.stop();
-        //mGLSurfaceView.onPause();
         mSensorManager.unregisterListener(this);
     }
 

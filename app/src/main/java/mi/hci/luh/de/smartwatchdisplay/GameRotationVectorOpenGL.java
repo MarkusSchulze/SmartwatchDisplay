@@ -23,7 +23,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
-import android.widget.LinearLayout;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -45,10 +44,6 @@ public class GameRotationVectorOpenGL extends Activity{
     private GLSurfaceView mGLSurfaceView;
     private SensorManager mSensorManager;
     private MyRenderer mRenderer;
-
-    private BubbleView bubbleView;
-    private LinearLayout layout;
-    private Sensor accel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

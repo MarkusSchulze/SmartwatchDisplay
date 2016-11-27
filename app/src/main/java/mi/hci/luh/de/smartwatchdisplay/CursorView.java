@@ -8,14 +8,15 @@ import android.view.View;
 
 /**
  * Created by mox on 27.11.2016.
+ * https://www.linux.com/learn/how-code-2d-drawing-android-motion-sensors
  */
 
-public class BubbleView extends View {
+public class CursorView extends View {
     private int diameter;
     private int x;
     private int y;
     private ShapeDrawable bubble;
-    public BubbleView(Context context) {
+    public CursorView(Context context) {
         super(context);
         createBubble();
     }
