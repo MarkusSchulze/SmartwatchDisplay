@@ -16,10 +16,12 @@ public class CursorView extends View {
     private int x;
     private int y;
     private ShapeDrawable bubble;
+
     public CursorView(Context context) {
         super(context);
         createBubble();
     }
+
     private void createBubble() {
         x = 200;
         y = 300;
